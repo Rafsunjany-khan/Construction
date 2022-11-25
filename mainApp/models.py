@@ -41,3 +41,22 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email
+class Testimonial(models.Model):
+    image = models.ImageField(upload_to='team')
+    name = models.CharField(max_length=800)
+    designations = models.CharField(max_length=800)
+    message = models.CharField(max_length=800)
+
+    def __str__(self):
+        return self.name
+class Message(models.Model):
+    name = models.CharField(max_length=800)
+    email = models.EmailField()
+    subject = models.CharField(max_length=800)
+    message = RichTextField()
+
+
+    def __str__(self):
+        return self.email
+
+
