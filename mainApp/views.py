@@ -1,12 +1,31 @@
 from django.shortcuts import render
 from .models import *
 def home(request):
+    remodeling = Project.objects.filter(category__icontains='Remodeling')[:3]
+    construction = Project.objects.filter(category__icontains='Construction')[:3]
+    design = Project.objects.filter(category__icontains='Design')[:3]
+    repairs = Project.objects.filter(category__icontains='Repairs')[:3]
+    testimonial = Testimonial.objects.all()
+    recent_blog = Blog.objects.all()[:3]
+
     context  = {
+        'remodeling': remodeling,
+        'construction': construction,
+        'design': design,
+        'repairs': repairs,
+
+        'testimonials': testimonial,
+
+        'rblog': recent_blog
 
     }
     return render(request, 'index.html', context)
 def about(request):
-    return render(request, 'about.html')
+    testimonial = Testimonial.objects.all()
+    context = {
+        'testimonials': testimonial,
+    }
+    return render(request, 'about.html', context)
 def blog(request):
     blogs = Blog.objects.all()
 
@@ -26,7 +45,11 @@ def contact(request):
     contact = Contact.objects.all()
     return render(request, 'contact.html', {'contacts': contact})
 def services(request):
-    return render(request, 'services.html')
+    testimonial = Testimonial.objects.all()
+    context = {
+        'testimonials': testimonial,
+    }
+    return render(request, 'services.html', context)
 def service_details(request):
     return render(request, 'service-details.html')
 def projects(request):
