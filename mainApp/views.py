@@ -6,13 +6,15 @@ def home(request):
     design = Project.objects.filter(category__icontains='Design')[:3]
     repairs = Project.objects.filter(category__icontains='Repairs')[:3]
     testimonial = Testimonial.objects.all()
-    recent_blog = Blog.objects.all()[:3]
+    recent_blog = Blog.objects.all().order_by('-date')[:3]
+    constructions = Construction.objects.all()[:4]
 
     context  = {
         'remodeling': remodeling,
         'construction': construction,
         'design': design,
         'repairs': repairs,
+        'constructions': constructions,
 
         'testimonials': testimonial,
 
@@ -21,8 +23,12 @@ def home(request):
     }
     return render(request, 'index.html', context)
 def about(request):
+    abouts = About.objects.all()
+    teams = OurTeam.objects.all()
     testimonial = Testimonial.objects.all()
     context = {
+        'abouts': abouts,
+        'teams': teams,
         'testimonials': testimonial,
     }
     return render(request, 'about.html', context)
@@ -35,7 +41,7 @@ def blog(request):
     return render(request, 'blog.html', context)
 def blog_details(request,pk):
     blog_detail = Blog.objects.get(pk=pk)
-    recent_blog = Blog.objects.all()[:10]
+    recent_blog = Blog.objects.all().order_by('-date')[:10]
     context = {
         'bdetails': blog_detail,
         'r_blog': recent_blog,
