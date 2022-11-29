@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import *
 def home(request):
+    slider = Slider.objects.all()
     remodeling = Project.objects.filter(category__icontains='Remodeling')[:3]
     construction = Project.objects.filter(category__icontains='Construction')[:3]
     design = Project.objects.filter(category__icontains='Design')[:3]
@@ -8,13 +9,27 @@ def home(request):
     testimonial = Testimonial.objects.all()
     recent_blog = Blog.objects.all().order_by('-date')[:3]
     constructions = Construction.objects.all()[:4]
+    services = Service.objects.all()
+
+    modisit = Feature.objects.filter(category__icontains='Modisit')
+    praesenti = Feature.objects.filter(category__icontains='Praesenti')
+    explica = Feature.objects.filter(category__icontains='Explica')
+    nostrum = Feature.objects.filter(category__icontains='Nostrum')
+
 
     context  = {
+        'slider': slider,
         'remodeling': remodeling,
         'construction': construction,
         'design': design,
         'repairs': repairs,
         'constructions': constructions,
+        'services': services,
+
+        'modisit': modisit,
+        'praesenti': praesenti,
+        'explica': explica,
+        'nostrum': nostrum,
 
         'testimonials': testimonial,
 
@@ -51,13 +66,16 @@ def contact(request):
     contact = Contact.objects.all()
     return render(request, 'contact.html', {'contacts': contact})
 def services(request):
+    services = Service.objects.all()
     testimonial = Testimonial.objects.all()
     context = {
+        'services': services,
         'testimonials': testimonial,
     }
     return render(request, 'services.html', context)
-def service_details(request):
-    return render(request, 'service-details.html')
+def service_details(request,pk):
+    services = Service.objects.get(pk=pk)
+    return render(request, 'service-details.html', {'services': services})
 def projects(request):
     remodeling = Project.objects.filter(category__icontains='Remodeling')
     construction = Project.objects.filter(category__icontains='Construction')
@@ -74,3 +92,8 @@ def projects(request):
 def project_details(request,pk):
     project_details = Project.objects.get(pk=pk)
     return render(request, 'project-details.html', {'pdetails': project_details})
+def newsLetter(request):
+    if request.method =='POST':
+        email = request.POST.get('email')
+        user = NewsLetter(email=email)
+        user.save()

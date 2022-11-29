@@ -85,13 +85,14 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="hero">
-
     <div class="info d-flex align-items-center">
+
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center">
-<!--            <h2 data-aos="fade-down">Welcome to <span>Construction</span></h2>-->
-            <p data-aos="fade-up">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <h2 data-aos="fade-down">Welcome to <span>Construction</span></h2>
+
+            <p data-aos="fade-up"></p>
             <a data-aos="fade-up" data-aos-delay="200" href="#get-started" class="btn-get-started">Get Started</a>
           </div>
         </div>
@@ -99,12 +100,14 @@
     </div>
 
     <div id="hero-carousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+      {%for x in slider %}
+      <div class="carousel-item active" style="background-image: url({{x.slide.url}})"></div>
+      {% endfor %}
 
-      <div class="carousel-item active" style="background-image: url({% static 'img/hero-carousel/hero-carousel-1.jpg' %})"></div>
-      <div class="carousel-item" style="background-image: url({% static 'img/hero-carousel/hero-carousel-2.jpg' %})"></div>
-      <div class="carousel-item" style="background-image: url({% static 'img/hero-carousel/hero-carousel-3.jpg' %})"></div>
-      <div class="carousel-item" style="background-image: url({% static 'img/hero-carousel/hero-carousel-4.jpg' %})"></div>
-      <div class="carousel-item" style="background-image: url({% static 'img/hero-carousel/hero-carousel-5.jpg' %})"></div>
+<!--      <div class="carousel-item" style="background-image: url({% static 'img/hero-carousel/hero-carousel-2.jpg' %})"></div>-->
+<!--      <div class="carousel-item" style="background-image: url({% static 'img/hero-carousel/hero-carousel-3.jpg' %})"></div>-->
+<!--      <div class="carousel-item" style="background-image: url({% static 'img/hero-carousel/hero-carousel-4.jpg' %})"></div>-->
+<!--      <div class="carousel-item" style="background-image: url({% static 'img/hero-carousel/hero-carousel-5.jpg' %})"></div>-->
 
       <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
@@ -115,7 +118,6 @@
       </a>
 
     </div>
-
   </section><!-- End Hero Section -->
 
   <main id="main">
@@ -215,73 +217,18 @@
         </div>
 
         <div class="row gy-4">
-
+          {% for x in services %}
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="service-item  position-relative">
               <div class="icon">
                 <i class="fa-solid fa-mountain-city"></i>
               </div>
-              <h3>Nesciunt Mete</h3>
-              <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
-              <a href="{% url 'service-details' %}" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
+              <h3>{{x.title}}</h3>
+              <p>{{x.details|safe|slice:":201"}}</p>
+              <a href="{% url 'service-details' x.pk %}" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-arrow-up-from-ground-water"></i>
-              </div>
-              <h3>Eosle Commodi</h3>
-              <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
-              <a href="{% url 'service-details' %}" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-compass-drafting"></i>
-              </div>
-              <h3>Ledo Markt</h3>
-              <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
-              <a href="{% url 'service-details' %}" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-trowel-bricks"></i>
-              </div>
-              <h3>Asperiores Commodit</h3>
-              <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
-              <a href="{% url 'service-details' %}" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-helmet-safety"></i>
-              </div>
-              <h3>Velit Doloremque</h3>
-              <p>Cumque et suscipit saepe. Est maiores autem enim facilis ut aut ipsam corporis aut. Sed animi at autem alias eius labore.</p>
-              <a href="{% url 'service-details' %}" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-arrow-up-from-ground-water"></i>
-              </div>
-              <h3>Dolori Architecto</h3>
-              <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
-              <a href="{% url 'service-details' %}" class="readmore stretched-link">Learn more <i class="bi bi-arrow-right"></i></a>
-            </div>
-          </div><!-- End Service Item -->
-
+          {% endfor %}
         </div>
 
       </div>
@@ -301,7 +248,7 @@
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="100">
               <i class="bi bi-easel flex-shrink-0"></i>
               <div>
-                <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
+                <h4><a href="" class="stretched-link">Mission</a></h4>
                 <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
               </div>
             </div><!-- End Icon Box -->
@@ -309,7 +256,7 @@
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="200">
               <i class="bi bi-patch-check flex-shrink-0"></i>
               <div>
-                <h4><a href="" class="stretched-link">Nemo Enim</a></h4>
+                <h4><a href="" class="stretched-link">Vission</a></h4>
                 <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
               </div>
             </div><!-- End Icon Box -->
@@ -317,7 +264,7 @@
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300">
               <i class="bi bi-brightness-high flex-shrink-0"></i>
               <div>
-                <h4><a href="" class="stretched-link">Dine Pad</a></h4>
+                <h4><a href="" class="stretched-link">Goal</a></h4>
                 <p>Explicabo est voluptatum asperiores consequatur magnam. Et veritatis odit. Sunt aut deserunt minus aut eligendi omnis</p>
               </div>
             </div><!-- End Icon Box -->
@@ -368,88 +315,66 @@
         </ul>
 
         <div class="tab-content">
-
+          {% for x in modisit %}
           <div class="tab-pane active show" id="tab-1">
             <div class="row">
               <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="100">
-                <h3>Voluptatem dignissimos provident</h3>
+                <h3>{{x.title}}</h3>
                 <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
+                  {{x.description|safe}}
                 </p>
-                <ul>
-                  <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check2-all"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center" data-aos="fade-up" data-aos-delay="200">
-                <img src="{% static 'img/features-1.jpg' %}" alt="" class="img-fluid">
+                <img src="{{x.image.url}}" alt="" class="img-fluid">
               </div>
             </div>
           </div><!-- End tab content item -->
-
+          {% endfor %}
+          {% for x in praesenti %}
           <div class="tab-pane" id="tab-2">
             <div class="row">
               <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-                <h3>Neque exercitationem debitis</h3>
+                <h3>{{x.title}}</h3>
                 <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
+                  {{x.description|safe}}
                 </p>
-                <ul>
-                  <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check2-all"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check2-all"></i> Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</li>
-                  <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="{% static 'img/features-2.jpg' %}" alt="" class="img-fluid">
+                <img src="{{x.image.url}}" alt="" class="img-fluid">
               </div>
             </div>
           </div><!-- End tab content item -->
-
+          {% endfor %}
+          {% for x in explica %}
           <div class="tab-pane" id="tab-3">
             <div class="row">
               <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-                <h3>Voluptatibus commodi accusamu</h3>
-                <ul>
-                  <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check2-all"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check2-all"></i> Provident mollitia neque rerum asperiores dolores quos qui a. Ipsum neque dolor voluptate nisi sed.</li>
-                </ul>
+                <h3>{{x.title}}</h3>
                 <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
+                 {{x.description|safe}}
                 </p>
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="{% static 'img/features-3.jpg' %}" alt="" class="img-fluid">
+                <img src="{{x.image.url}}" alt="" class="img-fluid">
               </div>
             </div>
           </div><!-- End tab content item -->
-
+          {% endfor %}
+          {%for x in nostrum %}
           <div class="tab-pane" id="tab-4">
             <div class="row">
               <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
-                <h3>Omnis fugiat ea explicabo sunt</h3>
+                <h3>{{x.title}}</h3>
                 <p class="fst-italic">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua.
+                 {{x.description|safe}}
                 </p>
-                <ul>
-                  <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-                  <li><i class="bi bi-check2-all"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-                  <li><i class="bi bi-check2-all"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</li>
-                </ul>
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="{% static 'img/features-4.jpg' %}" alt="" class="img-fluid">
+                <img src="{{x.image.url}}" alt="" class="img-fluid">
               </div>
             </div>
           </div><!-- End tab content item -->
-
+          {% endfor %}
         </div>
 
       </div>
