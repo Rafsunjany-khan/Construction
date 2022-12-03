@@ -64,6 +64,9 @@ def blog_details(request,pk):
     return render(request, 'blog-details.html', context)
 def contact(request):
     contact = Contact.objects.all()
+
+    if request.method =='POST':
+        name = request.method.get('name')
     return render(request, 'contact.html', {'contacts': contact})
 def services(request):
     services = Service.objects.all()
@@ -92,8 +95,9 @@ def projects(request):
 def project_details(request,pk):
     project_details = Project.objects.get(pk=pk)
     return render(request, 'project-details.html', {'pdetails': project_details})
+
 def newsLetter(request):
-    if request.method =='POST':
+    if request.method == 'POST':
         email = request.POST.get('email')
-        user = NewsLetter(email=email)
-        user.save()
+        us = NewsLetter(email=email)
+        us.save()
