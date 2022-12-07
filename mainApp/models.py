@@ -88,10 +88,24 @@ class Feature(models.Model):
         return self.title
 
 class Mission(models.Model):
+    title = models.CharField(max_length=800, null=True, blank=True)
     text = RichTextField()
 
     def __str__(self):
-        return self.text
+        if self.title == None:
+            return self.title
+class Vision(models.Model):
+    title = models.CharField(max_length=800, null=True, blank=True)
+    text = RichTextField()
+
+    def __str__(self):
+        return self.title
+class Goal(models.Model):
+    title = models.CharField(max_length=800, null=True, blank=True)
+    text = RichTextField()
+
+    def __str__(self):
+        return self.title
 class About(models.Model):
     title = models.CharField(max_length=800)
     sub_title = models.CharField(max_length=800)
@@ -116,7 +130,7 @@ class OurTeam(models.Model):
         return self.name
 
 class NewsLetter(models.Model):
-    email = models.EmailField(max_length=200)
+    email = models.EmailField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.email

@@ -54,14 +54,28 @@ def home(request):
     return render(request, 'index.html', context)
 def about(request):
     abouts = About.objects.all()
+    goal = Goal.objects.all()
     teams = OurTeam.objects.all()
     testimonial = Testimonial.objects.all()
+    client = NewsLetter.objects.all().count()
     count = Project.objects.all().count()
+    hard_worker = OurTeam.objects.all().count()
+
+
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        us = NewsLetter(email=email)
+        us.save()
+        return redirect('about')
+
     context = {
         'abouts': abouts,
+        'goal': goal,
         'teams': teams,
         'testimonials': testimonial,
+        'happy_client': client,
         'count': count,
+        'hard_worker': hard_worker,
     }
     return render(request, 'about.html', context)
 def blog(request):
@@ -81,6 +95,11 @@ def blog_details(request,pk):
     return render(request, 'blog-details.html', context)
 def contact(request):
     contact = Contact.objects.all()
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        us = NewsLetter(email=email)
+        us.save()
+        return redirect('home')
 
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -94,6 +113,11 @@ def contact(request):
 def services(request):
     services = Service.objects.all()
     testimonial = Testimonial.objects.all()
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        us = NewsLetter(email=email)
+        us.save()
+        return redirect('services')
     context = {
         'services': services,
         'testimonials': testimonial,
